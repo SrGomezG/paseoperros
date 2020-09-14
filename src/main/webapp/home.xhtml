@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./plantillas/principal.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="titulo_perros">
+        Paseando Perros - Listado
+    </ui:define>
+    
+    <ui:define name="content">
+        <h:form>
+            <p:panel id="panelPerros" header="Listado Perros - #{listaSeControlador.listaPerros.contarNodos()}">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Número"/>
+                    <p:outputLabel value="#{listaSeControlador.perroMostrar.numero}"/>
+                    <p:outputLabel value="Nombre"/>
+                    <p:outputLabel value="#{listaSeControlador.perroMostrar.nombre}"/>
+                    <p:outputLabel value="Edad"/>
+                    <p:outputLabel value="#{listaSeControlador.perroMostrar.edad}"/>
+                </p:panelGrid>
+
+                    <p:panelGrid columns="3">
+                        <p:commandButton value="Primero" disabled="#{listaSeControlador.temp == listaSeControlador.listaPerros.cabeza}">
+                            <p:ajax listener="#{listaSeControlador.irPrimero()}" update="panelPerros"/>
+                        </p:commandButton>
+
+                        <p:commandButton value="Siguiente" disabled="#{listaSeControlador.temp.siguiente == null}">
+                            <p:ajax listener="#{listaSeControlador.irSiguiente()}" update="panelPerros"/>
+                        </p:commandButton>
+
+                        <p:commandButton value="Último" disabled="#{listaSeControlador.temp.siguiente == null}">
+                            <p:ajax listener="#{listaSeControlador.irUltimo()}" update="panelPerros"/>
+                        </p:commandButton>
+
+                        <p:commandButton value="Invertir Lista">
+                            <p:ajax listener="#{listaSeControlador.invertir()}" update="panelPerros"/>
+                        </p:commandButton>
+
+                        <p:commandButton value="Intercambiar extremos">
+                            <p:ajax listener="#{listaSeControlador.intercambiar()}" update="panelPerros"/>
+                        </p:commandButton>
+                        
+                    </p:panelGrid>
+            </p:panel>    
+        </h:form>
+    </ui:define>
+
+</ui:composition>
