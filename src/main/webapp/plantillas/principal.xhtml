@@ -6,13 +6,45 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+
+        <style type="text/css">
+            .ui-diagram-element {   
+                width:14em; 
+                height:4em;     
+                line-height:4em;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+                border-radius: 4px;
+                border: 1px solid transparent;
+                background-color: #98AFC7;
+                color: #ffffff;
+            }
+
+            .ui-diagram-success {
+                background-color: #9CB071;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+
+            .ui-diagram-fail {
+                background-color: #C34A2C;
+                color: #ffffff;
+            }
+
+            .flow-label {
+                font-size: 24px;
+                font-weight: bold;
+                color: #816A51;
+            }
+        </style>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title><ui:insert name="titulo_perros">
-        </ui:insert>
+            </ui:insert>
         </title>
-        
+
     </h:head>
 
     <h:body>
@@ -23,7 +55,7 @@
                     <p:menubar>
                         <p:submenu label="Inicio" icon="pi pi-file">
                             <p:submenu label="Gestión Perros" icon="pi pi-briefcase">
-                                <p:menuitem value="Listar Perros" action="" />
+                                <p:menuitem value="Listar Perros" action="home" />
                                 <p:menuitem value="Ingresar Perro" action="ingresar_perro" />
                             </p:submenu>
                             <p:menuitem value="Abrir" url="#" />
@@ -52,5 +84,7 @@
         </div>
 
     </h:body>
+    
+     <p:diagram value="#{listaSeControlador.model}" style="height:600px" styleClass="ui-widget-content" />
 
 </html>
