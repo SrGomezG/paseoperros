@@ -39,8 +39,7 @@
         </style>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
+      
         <title><ui:insert name="titulo_perros">
             </ui:insert>
         </title>
@@ -55,8 +54,8 @@
                     <p:menubar>
                         <p:submenu label="Inicio" icon="pi pi-file">
                             <p:submenu label="Gestión Perros" icon="pi pi-briefcase">
-                                <p:menuitem value="Listar Perros" action="home" />
-                                <p:menuitem value="Ingresar Perro" action="ingresar_perro" />
+                                <p:menuitem value="Listar Perros" action="#{listaSeControlador.irHome()}" ajax="false"/>
+                                <p:menuitem value="Ingresar Perro" action="#{listaSeControlador.irCrearPerro()}" />
                             </p:submenu>
                             <p:menuitem value="Abrir" url="#" />
                             <p:separator />
@@ -72,6 +71,12 @@
                 <p:growl id="grwlError"/>
             </ui:insert>
         </div>
+        
+        <div id="content" class="center_content">
+            <ui:insert name="content">
+                
+            </ui:insert>
+        </div>    
 
         <div id="bottom">
             <center>
@@ -85,6 +90,6 @@
 
     </h:body>
     
-     <p:diagram value="#{listaSeControlador.model}" style="height:600px" styleClass="ui-widget-content" />
+     
 
 </html>

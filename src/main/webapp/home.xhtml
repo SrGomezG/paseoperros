@@ -10,6 +10,7 @@
     </ui:define>
 
     <ui:define name="content">
+        <p:growl id="grwlErroresHome"/>
         <h:form>
             <p:panel id="panelPerros" header="Listado Perros - #{listaSeControlador.listaPerros.contarNodos()}">
                 <p:panelGrid columns="2">
@@ -35,48 +36,55 @@
                     </p:commandButton>
 
                     <p:commandButton value="Invertir Lista">
-                        <p:ajax listener="#{listaSeControlador.invertir()}" update="panelPerros"/>
+                        <p:ajax listener="#{listaSeControlador.invertir()}" update=":grwlErroresHome,panelPerros,frmBuscar"/>
                     </p:commandButton>
 
                     <p:commandButton value="Intercambiar extremos">
-                        <p:ajax listener="#{listaSeControlador.intercambiar()}" update="panelPerros"/>
+                        <p:ajax listener="#{listaSeControlador.intercambiar()}" update=":grwlErroresHome,panelPerros"/>
                     </p:commandButton>
 
                 </p:panelGrid>
             </p:panel>    
         </h:form>
-        
-         <p:panelGrid>
-             <p:commandButton value="Borrar" disabled="#{listaSeControlador.listaPerros.contarNodos()}) == 1}">
-                 <p:ajax listener="#{listaSeControlador.borrarPerro()}" update="panelPerros" process="@this" />
-                 <p:spinner value="#{listaSeControlador.datoBorrar}"  min="1" max="100" id="borrar" 
-                                   required="true" immediate="false" placeholder="Ingrese ID" /> 
 
-                    </p:commandButton>
-        
-        <h:form>
-           
-            <p:panel header="Buscar Perro - Posición">
-                <p:outputLabel value="Ingrese la posición a buscar"/>
-                
-                <p:spinner id="datoBuscar"  value="#{listaSeControlador.datoBuscar}" min="1" max="#{listaSeControlador.listaPerros.contarNodos()}" />
-                
-                <p:commandButton value="Buscar" update="pnlPerroEnc" action="#{listaSeControlador.buscarPerro()}" 
-                                 oncomplete="PF('dlgPerroEnc').show();"/>
-             
-            </p:panel>
+        <p:panelGrid>
+            <p:commandButton value="Borrar" disabled="#{listaSeControlador.listaPerros.contarNodos()}) == 1}">
+                <p:ajax listener="#{listaSeControlador.borrarPerro()}" update="panelPerros" process="@this" />
+                <p:spinner value="#{listaSeControlador.datoBorrar}"  min="1" max="100" id="borrar" 
+                           required="true" immediate="false" placeholder="Ingrese ID" /> 
 
-            <p:dialog header="Perro encontrado" widgetVar="dlgPerroEnc" modal="true" height="100" closeOnEscape="true">
-                <p:panel id="pnlPerroEnc" header="Datos Perro">
-                    <h:outputText  value="#{listaSeControlador.datoBuscar}" />
+            </p:commandButton>
+
+            <h:form id="frmBuscar">
+
+                <p:panel header="Buscar Perro - Posición">
+                    <p:outputLabel value="Ingrese la posición a buscar"/>
+
+                    <p:spinner id="datoBuscar"  value="#{listaSeControlador.datoBuscar}" min="1" max="#{listaSeControlador.listaPerros.contarNodos()}" />
+
+                    <p:commandButton value="Buscar" update="pnlPerroEnc" action="#{listaSeControlador.buscarPerro()}" 
+                                     oncomplete="PF('dlgPerroEnc').show();"/>
+
                 </p:panel>
-            </p:dialog>
+
+                <p:dialog header="Perro encontrado" widgetVar="dlgPerroEnc" height="200" closeOnEscape="true">
+                    <p:panel id="pnlPerroEnc" header="Datos Perro">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Numero: " />
+                            <h:outputText value="#{listaSeControlador.perroEncontrado.numero}" />
+                            <h:outputText value="Nombre: " />
+                            <h:outputText value="#{listaSeControlador.perroEncontrado.nombre}: " />
+                            <h:outputText value="Edad: " />
+                            <h:outputText value="#{listaSeControlador.perroEncontrado.edad}: " />
+                    </p:panel>
+                </p:dialog>
+
+                <p:diagram id="dgrPerros" value="#{listaSeControlador.model}" style="height:600px" styleClass="ui-widget-content" />
+            </h:form>
 
 
-        </h:form>
 
-
-
+        </p:panelGrid>
     </ui:define>
 
 
