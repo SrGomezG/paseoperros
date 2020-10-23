@@ -23,11 +23,20 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
-    <navigation-rule>
+
+<navigation-rule>
         <from-view-id>/home.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>crear</from-outcome>
             <to-view-id>/ingresar_perro.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>crearDE</from-outcome>
+            <to-view-id>/ingresar_perro_DE.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listaDE</from-outcome>
+            <to-view-id>/listade.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

@@ -3,8 +3,10 @@
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
         <Node id="ingresar_perro.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="listade.xhtml" x="650" y="150" zoom="true"/>
         <Node id="plantillas/principal.xhtml" x="400" y="150" zoom="true"/>
-        <Node id="home.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="home.xhtml" x="462" y="296" zoom="false"/>
+        <Node id="ingresar_perro_DE.xhtml" x="150" y="300" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
