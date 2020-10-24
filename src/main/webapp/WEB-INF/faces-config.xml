@@ -25,7 +25,7 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
 
 <navigation-rule>
-        <from-view-id>/home.xhtml</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>crear</from-outcome>
             <to-view-id>/ingresar_perro.xhtml</to-view-id>
@@ -35,7 +35,7 @@
             <to-view-id>/ingresar_perro_DE.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>listaDE</from-outcome>
+            <from-outcome>listaSe</from-outcome>
             <to-view-id>/listade.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>

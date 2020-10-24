@@ -100,6 +100,14 @@ public class ListaDEController implements Serializable {
         this.seleccionUbicacion = seleccionUbicacion;
     }
 
+    public ListaDE getListaPerrosDE() {
+        return listaPerrosDE;
+    }
+
+    public void setListaPerrosDE(ListaDE listaPerrosDE) {
+        this.listaPerrosDE = listaPerrosDE;
+    }
+
     public void irSiguiente() {
         temp = temp.getSiguiente().getAnterior();
         perroMostrar = temp.getDato();
