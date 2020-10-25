@@ -23,24 +23,24 @@
                 </p:panelGrid>
 
                 <p:panelGrid columns="3">
-                    <p:commandButton value="Primero" disabled="#{listaDEController.temp == listaDEController.listaPerrosDE.cabeza}">
-                        <p:ajax listener="#{listaDEController.irPrimero()}" update="panelPerros"/>
+                    <p:commandButton value="Primero" disabled="#{listaDEController.tempDE == listaDEController.listaPerrosDE.cabeza}">
+                        <p:ajax listener="#{listaDEController.irPrimeroDE()}" update="panelPerros"/>
                     </p:commandButton>
 
-                    <p:commandButton value="Siguiente" disabled="#{listaDEController.temp.siguiente == null}">
-                        <p:ajax listener="#{listaDEController.irSiguiente()}" update="panelPerros"/>
+                    <p:commandButton value="Siguiente" disabled="#{listaDEController.tempDE.siguiente == null}">
+                        <p:ajax listener="#{listaDEController.irSiguienteDE()}" update="panelPerros"/>
                     </p:commandButton>
 
-                    <p:commandButton value="Último" disabled="#{listaDEController.temp.siguiente == null}">
-                        <p:ajax listener="#{listaDEController.irUltimo()}" update="panelPerros"/>
+                    <p:commandButton value="Último" disabled="#{listaDEController.tempDE.siguiente == null}">
+                        <p:ajax listener="#{listaDEController.irUltimoDE()}" update="panelPerros"/>
                     </p:commandButton>
 
                     <p:commandButton value="Invertir Lista">
-                        <p:ajax listener="#{listaDEController.invertir()}" update=":grwlErroresHome,panelPerros,frmBuscar"/>
+                        <p:ajax listener="#{listaDEController.invertirDE()}" update=":grwlErroresHome,panelPerros,frmBuscar"/>
                     </p:commandButton>
 
                     <p:commandButton value="Intercambiar extremos">
-                        <p:ajax listener="#{listaDEController.intercambiar()}" update=":grwlErroresHome,panelPerros"/>
+                        <p:ajax listener="#{listaDEController.intercambiarDE()}" update=":grwlErroresHome,panelPerros"/>
                     </p:commandButton>
 
                 </p:panelGrid>
@@ -49,7 +49,7 @@
 
         <p:panelGrid>
             <p:commandButton value="Borrar" disabled="#{listaDEController.listaPerrosDE.contarNodosDE()}) == 1}">
-                <p:ajax listener="#{listaDEController.borrarPerro()}" update="panelPerros" process="@this" />
+                <p:ajax listener="#{listaDEController.borrarPerroDE()}" update="panelPerros" process="@this" />
                 <p:spinner value="#{listaDEController.datoBorrar}"  min="1" max="100" id="borrar" 
                            required="true" immediate="false" placeholder="Ingrese ID" /> 
 
@@ -62,7 +62,7 @@
 
                     <p:spinner id="datoBuscar"  value="#{listaDEController.datoBuscar}" min="1" max="#{listaDEController.listaPerrosDE.contarNodosDE()}" />
 
-                    <p:commandButton value="Buscar" update="pnlPerroEnc" action="#{listaDEController.buscarPerro()}" 
+                    <p:commandButton value="Buscar" update="pnlPerroEnc" action="#{listaDEController.buscarPerroDE()}" 
                                      oncomplete="PF('dlgPerroEnc').show();"/>
 
                 </p:panel>

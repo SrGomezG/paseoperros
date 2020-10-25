@@ -32,19 +32,19 @@ public class ListaDEController implements Serializable {
 
     private ListaDE listaPerrosDE;
 
-    private Perro perroMostrar;
+    private Perro perroMostrarDE;
 
-    private NodoDE temp;
+    private NodoDE tempDE;
 
-    private int datoBuscar;
+    private int datoBuscarDE;
 
-    private Perro perroEncontrado;
+    private Perro perroEncontradoDE;
 
-    private int datoBorrar;
+    private int datoBorrarDE;
 
     private DefaultDiagramModel model;
 
-    private int seleccionUbicacion = 0;
+    private int seleccionUbicacionDE = 0;
 
     /**
      * Creates a new instance of ListaDEController
@@ -55,49 +55,58 @@ public class ListaDEController implements Serializable {
     @PostConstruct
     private void iniciar() {
         listaPerrosDE = new ListaDE();
-        temp = listaPerrosDE.getCabeza();
+        tempDE = listaPerrosDE.getCabeza();
 
-        inicializadorModelo();
+        inicializadorModeloDE();
     }
 
+    public NodoDE getTempDE() {
+        return tempDE;
+    }
+
+    public void setTempDE(NodoDE tempDE) {
+        this.tempDE = tempDE;
+    }
+
+    
     public Perro getPerroMostrar() {
-        return perroMostrar;
+        return perroMostrarDE;
     }
 
     public void setPerroMostrar(Perro perroMostrar) {
-        this.perroMostrar = perroMostrar;
+        this.perroMostrarDE = perroMostrar;
     }
 
     public int getDatoBuscar() {
-        return datoBuscar;
+        return datoBuscarDE;
     }
 
     public void setDatoBuscar(int datoBuscar) {
-        this.datoBuscar = datoBuscar;
+        this.datoBuscarDE = datoBuscar;
     }
 
     public Perro getPerroEncontrado() {
-        return perroEncontrado;
+        return perroEncontradoDE;
     }
 
     public void setPerroEncontrado(Perro perroEncontrado) {
-        this.perroEncontrado = perroEncontrado;
+        this.perroEncontradoDE = perroEncontrado;
     }
 
     public int getDatoBorrar() {
-        return datoBorrar;
+        return datoBorrarDE;
     }
 
     public void setDatoBorrar(int datoBorrar) {
-        this.datoBorrar = datoBorrar;
+        this.datoBorrarDE = datoBorrar;
     }
 
     public int getSeleccionUbicacion() {
-        return seleccionUbicacion;
+        return seleccionUbicacionDE;
     }
 
     public void setSeleccionUbicacion(int seleccionUbicacion) {
-        this.seleccionUbicacion = seleccionUbicacion;
+        this.seleccionUbicacionDE = seleccionUbicacion;
     }
 
     public ListaDE getListaPerrosDE() {
@@ -108,54 +117,54 @@ public class ListaDEController implements Serializable {
         this.listaPerrosDE = listaPerrosDE;
     }
 
-    public void irSiguiente() {
-        temp = temp.getSiguiente().getAnterior();
-        perroMostrar = temp.getDato();
+    public void irSiguienteDE() {
+        tempDE = tempDE.getSiguiente().getAnterior();
+        perroMostrarDE = tempDE.getDato();
 
     }
 
-    public void irUltimo() {
-        temp = listaPerrosDE.getCabeza();
-        while (temp.getSiguiente().getAnterior() != null) {
-            temp = temp.getSiguiente().getAnterior();
+    public void irUltimoDE() {
+        tempDE = listaPerrosDE.getCabeza();
+        while (tempDE.getSiguiente().getAnterior() != null) {
+            tempDE = tempDE.getSiguiente().getAnterior();
         }
-        perroMostrar = temp.getDato();
+        perroMostrarDE = tempDE.getDato();
     }
 
-    public void irPrimero() {
+    public void irPrimeroDE() {
         if (listaPerrosDE.getCabeza() != null) {
-            temp = listaPerrosDE.getCabeza();
-            perroMostrar = temp.getDato();
+            tempDE = listaPerrosDE.getCabeza();
+            perroMostrarDE = tempDE.getDato();
         } else {
             JsfUtil.addErrorMessage("No existen datos en la lista");
         }
     }
 
-    public void invertir() {
-        listaPerrosDE.invertir();
-        irPrimero();
-        inicializadorModelo();
+    public void invertirDE() {
+        listaPerrosDE.invertirDE();
+        irPrimeroDE();
+        inicializadorModeloDE();
     }
 
-    public void intercambiar() {
-        listaPerrosDE.intercambiarExtremos();
-        irPrimero();
+    public void intercambiarDE() {
+        listaPerrosDE.intercambiarExtremosDE();
+        irPrimeroDE();
     }
 
-    public void buscarPerro() {
-        Perro perroEncontrado = listaPerrosDE.encontrarxPosicionDE(datoBuscar);
-        System.out.println("perroEncontrado = " + perroEncontrado);
+    public void buscarPerroDE() {
+        Perro perroEncontradoDE = listaPerrosDE.encontrarxPosicionDE(datoBuscarDE);
+        System.out.println("perroEncontrado = " + perroEncontradoDE);
     }
 
-    public void borrarPerro() {
-        listaPerrosDE.borrarPerroPorId(datoBuscar);
-        irPrimero();
+    public void borrarPerroDE() {
+        listaPerrosDE.borrarPerroPorIdDE(datoBuscarDE);
+        irPrimeroDE();
         FlowChartConnector connector = new FlowChartConnector();
         connector.setPaintStyle("{strokeStyle:'#C7B097',lineWidth:3}");
         model.setDefaultConnector(connector);
     }
 
-    public void inicializadorModelo() {
+    public void inicializadorModeloDE() {
         model = new DefaultDiagramModel();
         model.setMaxConnections(-1);
 
@@ -200,32 +209,32 @@ public class ListaDEController implements Serializable {
         return conn;
     }
 
-    public String irCrearPerro() {
-        perroEncontrado = new Perro();
-        return "crear";
+    public String irCrearPerroDE() {
+        perroEncontradoDE = new Perro();
+        return "crearDE";
     }
 
-    public void guardarPerro() {
-        switch (seleccionUbicacion) {
+    public void guardarPerroDE() {
+        switch (seleccionUbicacionDE) {
             case 1:
-                listaPerrosDE.adicionarAlInicio(perroEncontrado);
+                listaPerrosDE.adicionarAlInicioDE(perroEncontradoDE);
                 break;
             case 2:
-                listaPerrosDE.adicionarNodo(perroEncontrado);
+                listaPerrosDE.adicionarNodoDE(perroEncontradoDE);
                 break;
             default:
-                listaPerrosDE.adicionarNodo(perroEncontrado);
+                listaPerrosDE.adicionarNodoDE(perroEncontradoDE);
 
         }
-        listaPerrosDE.adicionarNodo(perroEncontrado);
-        perroEncontrado = new Perro();
-        irPrimero();
+        listaPerrosDE.adicionarNodoDE(perroEncontradoDE);
+        perroEncontradoDE = new Perro();
+        irPrimeroDE();
         JsfUtil.addSuccessMessage("Se ha adicionado el perro a la lista");
     }
 
     public String irHome() {
-        perroEncontrado = new Perro();
-        inicializadorModelo();
-        return "home";
+        perroEncontradoDE = new Perro();
+        inicializadorModeloDE();
+        return "homede";
     }
 }
