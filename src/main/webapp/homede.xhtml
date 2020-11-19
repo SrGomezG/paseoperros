@@ -11,83 +11,87 @@
 
     <ui:define name="content">
         <p:growl id="grwlErroresHome"/>
-        <h:form id="formPE" prependId="false">
-            <p:panel id="panelPerros" header="Listado Perros - #{listaDEController.listaPerrosDE.contarNodosDE()}">
-                <p:panelGrid columns="2">
+        <h:form id="Formulario" >
+            <p:growl id="errores"/>
+            <p:panel id="panelPerrosDE" header="Listado perros DE - #{listaDEController.listaPerrosDE.contarNodosDE()} ">
+                <p:panelGrid columns="2"  >
                     <p:outputLabel value="Número"/>
-                    <p:outputLabel value="#{listaDEController.perroMostrar.numero}"/>
+                    <p:outputLabel value="#{listaDEController.perroMostrarDE.numero}"/>
                     <p:outputLabel value="Nombre"/>
-                    <p:outputLabel value="#{listaDEController.perroMostrar.nombre}"/>
+                    <p:outputLabel value="#{listaDEController.perroMostrarDE.nombre}"/>
                     <p:outputLabel value="Edad"/>
-                    <p:outputLabel value="#{listaDEController.perroMostrar.edad}"/>
+                    <p:outputLabel value="#{listaDEController.perroMostrarDE.edad}"/>
                 </p:panelGrid>
-
-                <p:panelGrid columns="3">
+                <p:panelGrid columns="3" id="panel" >
                     <p:commandButton value="Primero" disabled="#{listaDEController.tempDE == listaDEController.listaPerrosDE.cabeza}">
-                        <p:ajax listener="#{listaDEController.irPrimeroDE()}" update="panelPerros"/>
+                        <p:ajax listener="#{listaDEController.irPrimero()}" update="panelPerrosDE"/>
                     </p:commandButton>
-
+                    <p:commandButton value="Anterior" disabled="#{listaDEController.tempDE == listaDEController.listaPerrosDE.cabeza}">
+                        <p:ajax listener="#{listaDEController.irAnterior()}" update="panelPerrosDE"/>
+                    </p:commandButton>
                     <p:commandButton value="Siguiente" disabled="#{listaDEController.tempDE.siguiente == null}">
-                        <p:ajax listener="#{listaDEController.irSiguienteDE()}" update="panelPerros"/>
+                        <p:ajax listener="#{listaDEController.irSiguiente()}" update="panelPerrosDE"/> 
                     </p:commandButton>
-
                     <p:commandButton value="Último" disabled="#{listaDEController.tempDE.siguiente == null}">
-                        <p:ajax listener="#{listaDEController.irUltimoDE()}" update="panelPerros"/>
+                        <p:ajax listener="#{listaDEController.irUltimo()}" update="panelPerrosDE"/> 
                     </p:commandButton>
-
                     <p:commandButton value="Invertir Lista">
-                        <p:ajax listener="#{listaDEController.invertirDE()}" update=":grwlErroresHome,panelPerros,frmBuscar"/>
+                        <p:ajax listener="#{listaDEController.invertir()}" update="diagram,frmBuscar"/>
                     </p:commandButton>
-
                     <p:commandButton value="Intercambiar extremos">
-                        <p:ajax listener="#{listaDEController.intercambiarDE()}" update=":grwlErroresHome,panelPerros"/>
+                        <p:ajax listener="#{listaDEController.intercambiar()}" update="diagram,frmBuscar"/>
                     </p:commandButton>
 
                 </p:panelGrid>
-            </p:panel>    
+            </p:panel>
         </h:form>
 
-        <p:panelGrid>
-            <p:commandButton value="Borrar" disabled="#{listaDEController.listaPerrosDE.contarNodosDE()}) == 1}">
-                <p:ajax listener="#{listaDEController.borrarPerroDE()}" update="panelPerros" process="@this" />
-                <p:spinner value="#{listaDEController.datoBorrar}"  min="1" max="100" id="borrar" 
-                           required="true" immediate="false" placeholder="Ingrese ID" /> 
-
-            </p:commandButton>
-
-            <h:form id="frmBuscar">
-
-                <p:panel header="Buscar Perro - Posición">
-                    <p:outputLabel value="Ingrese la posición a buscar"/>
-
-                    <p:spinner id="datoBuscar"  value="#{listaDEController.datoBuscar}" min="1" max="#{listaDEController.listaPerrosDE.contarNodosDE()}" />
-
-                    <p:commandButton value="Buscar" update="pnlPerroEnc" action="#{listaDEController.buscarPerroDE()}" 
-                                     oncomplete="PF('dlgPerroEnc').show();"/>
-
+        <h:form id="frmBuscar">
+            <p:panel header="Buscar Perro Por Posicion">
+                <p:outputLabel value="Ingresar la posición a buscar"/>
+                <p:spinner id="datoBuscar" value="#{listaDEController.datoBuscarDE}" min="1" max="#{listaDEController.listaPerrosDE.contarNodosDE()}"/>
+                <p:commandButton value="Buscar" update="pnlPerroEncDE,diagram" action="#{listaDEController.buscarPerro()}"
+                                 oncomplete="PF('dlg3').show();" disabled="#{listaDEController.tempDE == null}">
+                </p:commandButton>
+            </p:panel>
+            <p:dialog header="Perro Encontrado" widgetVar="dlg3" height="200" closeOnEscape="true">
+                <p:panel id="pnlPerroEncDE" header="Datos Perro">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Nombre:" />
+                        <h:outputText value="#{listaDEController.perroEncontradoDE.nombre}" />
+                        <h:outputText value="Edad:" />
+                        <h:outputText value="#{listaDEController.perroEncontradoDE.edad}" />
+                        <h:outputText value="Numero:" />
+                        <h:outputText value="#{listaDEController.perroEncontradoDE.numero}" />
+                    </h:panelGrid>
                 </p:panel>
+            </p:dialog>
+        </h:form>
 
-                <p:dialog header="Perro encontrado" widgetVar="dlgPerroEnc" height="200" closeOnEscape="true">
-                    <p:panel id="pnlPerroEnc" header="Datos Perro">
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Numero: " />
-                            <h:outputText value="#{listaDEController.perroEncontrado.numero}" />
-                            <h:outputText value="Nombre: " />
-                            <h:outputText value="#{listaDEController.perroEncontrado.nombre}: " />
-                            <h:outputText value="Edad: " />
-                            <h:outputText value="#{listaDEController.perroEncontrado.edad}: " />
-                        </p:panelGrid>    
-                    </p:panel>
-                </p:dialog>
+        <h:form id="formBotones">
+            <p:panel id="panelBotones" header="Acciones">
+                <p:panelGrid columns="2" >
+                    <p:commandButton value="Eliminar por Posición" disabled="#{listaDEController.listaPerrosDE.contarNodosDE() == 0}">
+                        <p:ajax listener="#{listaDEController.eliminarPorPosicion()}" update="Formulario,formBotones,diagram"/> 
 
-                <p:diagram id="dgrPerros" value="#{listaDEController.model}" style="height:600px" styleClass="ui-widget-content" />
-            </h:form>
-
-
-
-        </p:panelGrid>
+                        <p:spinner value="#{listaDEController.borrarPorPosicion}" min="1"  max="#{listaDEController.listaPerrosDE.contarNodosDE()}"/>
+                    </p:commandButton>
+                    <p:commandButton value="Eliminación directa"  disabled="#{listaDEController.listaPerrosDE.contarNodosDE() == 0}">
+                        <p:ajax listener="#{listaDEController.eliminacionDirecta()}" update="Formulario,formBotones,diagram"/> 
+                    </p:commandButton>
+                    <h:outputLabel value="Ingrese la posicion 1 ******** Ingrese la posicion 2"  />
+                    <p:column/>
+                    <p:commandButton value="Intercambiar posición" disabled="#{listaDEController.listaPerrosDE.contarNodosDE() == 0}">
+                        <p:ajax listener="#{listaDEController.intercambiarPosicionesDadas()}" update="Formulario,formBotones,diagram"/> 
+                        <p:spinner value="#{listaDEController.posicionUno}" min="1"  max="#{listaDEController.listaPerrosDE.contarNodosDE()}"/>
+                        <p:spinner value="#{listaDEController.posicionDos}" min="1"  max="#{listaDEController.listaPerrosDE.contarNodosDE()}"/>
+                    </p:commandButton>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:form id="diagram">
+            <p:diagram  value="#{listaDEController.model}" style="height:700px" styleClass="ui-widget-content" />
+        </h:form>
     </ui:define>
-
-
 </ui:composition>
 

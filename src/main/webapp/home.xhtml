@@ -42,7 +42,6 @@
                     <p:commandButton value="Intercambiar extremos">
                         <p:ajax listener="#{listaSeControlador.intercambiar()}" update=":grwlErroresHome,panelPerros"/>
                     </p:commandButton>
-
                 </p:panelGrid>
             </p:panel>    
         </h:form>
@@ -52,7 +51,6 @@
                 <p:ajax listener="#{listaSeControlador.borrarPerro()}" update="panelPerros" process="@this" />
                 <p:spinner value="#{listaSeControlador.datoBorrar}"  min="1" max="100" id="borrar" 
                            required="true" immediate="false" placeholder="Ingrese ID" /> 
-
             </p:commandButton>
 
             <h:form id="frmBuscar">
@@ -64,7 +62,6 @@
 
                     <p:commandButton value="Buscar" update="pnlPerroEnc" action="#{listaSeControlador.buscarPerro()}" 
                                      oncomplete="PF('dlgPerroEnc').show();"/>
-
                 </p:panel>
 
                 <p:dialog header="Perro encontrado" widgetVar="dlgPerroEnc" height="200" closeOnEscape="true">
@@ -82,11 +79,6 @@
 
                 <p:diagram id="dgrPerros" value="#{listaSeControlador.model}" style="height:600px" styleClass="ui-widget-content" />
             </h:form>
-
-
-
         </p:panelGrid>
     </ui:define>
-
-
 </ui:composition>

@@ -6,7 +6,13 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>
+            <ui:insert name="titulo_perros">            
+            </ui:insert>
+        </title>
         <style type="text/css">
             .ui-diagram-element {   
                 width:14em; 
@@ -38,53 +44,37 @@
             }
         </style>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
-        <title><ui:insert name="titulo_perros">
-            </ui:insert>
-        </title>
-
     </h:head>
-
     <h:body>
-
         <div id="top">
             <ui:insert name="top">
                 <h:form>
                     <p:menubar>
                         <p:submenu label="Inicio" icon="pi pi-file">
                             <p:submenu label="Gestión Perros" icon="pi pi-briefcase">
-                                <p:menuitem value="Listar Perros" action="#{listaSeControlador.irHome()}" ajax="false"/>
-                                <p:menuitem value="Ingresar Perro" action="#{listaSeControlador.irCrearPerro()}" />
+                                <p:menuitem value="Listar Perros" action="#{listaSeControlador.irHome()}" ajax="false" />
+                                <p:menuitem value="Ingresar Perro" action="#{listaSeControlador.irCrearPerro()}"/>
+                                <p:menuitem value="Lista Perros DE" action="#{listaDEController.irHomeDE()}" ajax="false" />
+                                <p:menuitem value="Ingresar Perro DE" action="#{listaDEController.irCrearPerroDE()}"/>
                             </p:submenu>
-                            <p:menuitem value="Abrir" url="#" />
+                            <p:menuitem value="Open" url="#" />
                             <p:separator />
-                            <p:menuitem value="Salir" url="#" />
+                            <p:menuitem value="Quit" url="#" />
                         </p:submenu>
                     </p:menubar>
                 </h:form>
             </ui:insert>
         </div>
-
         <div id="content" class="center_content">
             <ui:insert name="content">
-               
             </ui:insert>
         </div>
-        
-
         <div id="bottom">
             <center>
-                <h:graphicImage 
-                    url="/resources/imagenes/kisspng-dog-walker-pet-animal-shelter-veterinarian-5ae9d973943d18.0008134415252749956072.png"
-                    width="20%"/>
+                <h:graphicImage url="/resources/imagenes/kisspng-dog-walker-pet-animal-shelter-veterinarian-5ae9d973943d18.0008134415252749956072" width="200"/>
                 <ui:insert name="bottom">
                 </ui:insert>
             </center>
         </div>
-
     </h:body>
-    
-     
-
 </html>
